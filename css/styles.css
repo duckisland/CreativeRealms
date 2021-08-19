@@ -297,6 +297,7 @@ select option{
   top: 160px;
   left: 120px;
   display: none;
+  cursor: pointer;
   z-index: 15;
 }
 #npc4{
@@ -304,6 +305,7 @@ select option{
   display: none;
   top: 80px;
   left: 100px;
+  cursor: pointer;
   z-index: 15;
 }
 #npc5{
@@ -311,6 +313,7 @@ select option{
   top: 80px;
   left: 100px;
   display: none;
+  cursor: pointer;
   z-index: 15;
 }
 #gameOver{
@@ -319,6 +322,7 @@ select option{
   left: 20px;
   opacity: .8;
   display: none;
+  cursor: pointer;
   z-index: 100;
 }
 
