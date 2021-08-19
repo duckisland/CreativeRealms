@@ -1,6 +1,6 @@
 var currency = "dolats"
 var gameOver = false
-const startExperience = 70
+const baseExperience = 70
 // return direction allows us to always keep the last door nav direction visible
 var ReturnDirection = 0
 var justLit = false
@@ -9,7 +9,7 @@ const audBattle = document.getElementById("audBattle")
 
 $(function(){
     // This is game initialization
-    Player.Experience = startExperience
+    Player.Experience = baseExperience
     SetStage(11)
 })
 
@@ -423,7 +423,7 @@ function InventoryValue(){
 function UpdateScore(){
     // Player score equals inventory value plus experience minus player's starting experience
     // Boost the overall score for experience
-    let currentScore = InventoryValue() + Player.Experience * 25 - startExperience * 25
+    let currentScore = InventoryValue() + Player.Experience * 25 - baseExperience * 25
     if(currentScore < 0 ){
       currentScore = 0
     }
@@ -475,13 +475,15 @@ function AttackNPC(elmID, npcID){
   const npcModel = NPC.find(e => e.ID == npcID)
   const basePercent = .25
   // The bonus percent is the remainder of 100% - the basePercent of 25%
-  const bonusPercent = .75 * (Player.Experience/5000)
+  const bonusPercent = .75 * ((Player.Experience + baseExperience)/5000)
   // The total success threshold can only reach a maximum of 100%
   // Since basePercent and bonusPercent are both fractions then we need to convert to whole number
   const successThreshold = (basePercent + bonusPercent)*100
   console.log('Your success threshold is ' + successThreshold)
   let currentWeapon = Item.find(e => e.ID == Player.WeaponInHand)
-  const potentialDamage = currentWeapon.Value
+  let potentialDamage = currentWeapon.Value
+  // Bare hands have zero value but should be capable of up to 6 damage points
+  if(potentialDamage <= 6){potentialDamage = 6}
   // An attempt must be below the success threshold to be successful
   const attempt = Math.floor(Math.random(1)*100)+1
   console.log('You must beat a ' + attempt)
@@ -491,8 +493,8 @@ function AttackNPC(elmID, npcID){
     LogHistory(output,'normal')
   }
   if(successfulStrike){
-    let damage = Math.floor(Math.random(1)*potentialDamage)+1
-    damage = Math.round(damage * (1+bonusPercent))
+    let damage = Math.floor(Math.random(1) * potentialDamage) + 1
+    damage = Math.round(damage * (1 + bonusPercent))
     currentNPC.Health-=damage
     const output = "You've inflicted " + damage + " points of damage on the " + npcModel.Description + " with your " + currentWeapon.Description + "!"
     LogHistory(output,'information')
