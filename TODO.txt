@@ -1,10 +1,11 @@
 [ ] Player cannot access items or new doors in a room when an aggressive npc is present
 	They may either fight or take a return route
-[ ] Fist fight sound
+[X] Fist fight sound
 [ ] Wooden weapon sound
-[ ] Keep a treasure value score
+[X] Keep a treasure value score
 [ ] Introduce a Trader NPC which is the only way to get certain weapons and keys
-[ ] Eat food to restore health
-[ ] Player can die. Should lose all items but how would this reset rooms and NPCs? (Or should game just end?)
-
-
+[X] Eat food to restore health
+[X] Player can die. Should lose all items but how would this reset rooms and NPCs? (Or should game just end?)
+[ ] Wooden weapon animation needed
+[ ] Password protected doors which only open based on clues in room descriptions
+[ ] Breakable treasure boxes in the rooms
