@@ -4,11 +4,11 @@ It is driven by JSON configuration files which define Rooms, Items, and NPC char
 
 Each room represents a single image tile and JQuery asists in navigation between them.
 
-LAYOUT YOUR OWN DUNGEON!
+LAYOUT YOUR OWN DUNGEON!<br>
 Rooms.js is where you can define your own unique dungeon layout.
 Each room can contain various items, NPC characters and doors
 
-GATE KEEPING STRATEGY
+GATE KEEPING STRATEGY<br>
 Moving through the dungeon is really a function of getting past various gate keepers.
 Gate Keepers include:
 - Locked doors which require specific keys
