@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
+
+body{
+  background-color: black;
+  font-family: 'Philosopher', sans-serif;
+  font-size: 18px;
+  color: #eeeeee;
+  user-select: none;
+-moz-user-select: none;
+}
+button{
+  cursor:pointer;
+  padding: 3px;
+  padding-left: 7px;
+  padding-right: 7px;
+  background-color: #b35900;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Philosopher', sans-serif;
+  font-size: 12px;
+  color: #ffffff
+}
+button:hover{
+  background-color: orange;
+}
+select{
+  background-color: transparent;
+  color: white;
+  font-family: 'Philosopher', sans-serif;
+  padding: 0 8px;
+  font-size: 18px;
+  border: none;
+}
+select option{
+  color: #000;
+  padding: 0 8px;
+}
+#btnNorth{
+  position: absolute;
+  top: 55px;
+  left: 102px;
+  font-size: 18px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 14px;
+  z-index: 10;
+}
+#btnSouth{
+  position: absolute;
+  top: 220px;
+  left: 102px;
+  font-size: 18px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 14px;
+  z-index: 10;
+}
+#btnWest{
+  position: absolute;
+  top: 136px;
+  left: 20px;
+  font-size: 18px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 14px;
+  z-index: 10;
+}
+#btnEast{
+  position: absolute;
+  top: 136px;
+  left: 185px;
+  font-size: 18px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 14px;
+  z-index: 10;
+}
+#title{
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-family: 'Aclonica', sans-serif;
+  font-size: 30px;
+}
+#roomview{
+  position: absolute;
+  border: 1px solid darkslategray;
+  overflow: hidden;
+  height: 201px;
+  width: 200px;
+  top: 50px;
+  left: 15px;
+}
+#roomImage{
+  position: absolute;
+  left: 0px;
+  height: 201px;
+  z-index: 5;
+}
+#roomImageTemp{
+  position: absolute;
+  left: -200px;
+  height: 201px;
+  z-index: 2;
+}
+#roomdescription{
+  position: absolute;
+  top: 50px;
+  left: 314px;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  width: 400px;
+  height: 80px;
+  overflow-y: auto;
+  padding: 5px;
+  font-size: 16px;
+}
+#lblItem{
+  position: absolute;
+  top: 146px;
+  left: 320px;
+  font-size: 20px;
+  color: slategrey
+}
+#itemview{
+  position: absolute;
+  top: 174px;
+  left: 314px;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  width: 400px;
+  height: 70px;
+  overflow-y: auto;
+  padding: 5px;
+  font-size: 16px;
+}
+.item{
+  color:deeppink;
+  cursor: pointer;
+}
+#health{
+  position: absolute;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  top: 50px;
+  left: 227px;
+  height: 204px;
+  width: 31px; 
+ }
+ #lblScore{
+  position: absolute;
+  top: 5px;
+  left: 480px;
+  font-size: 26px;
+  color:slategray;
+}
+#score{
+  position: absolute;
+  top: 5px;
+  left: 550px;
+  font-size: 26px;
+  color: darkred;
+}
+ #lblH{
+   position: absolute;
+   top: 226px;
+   left: 233px;
+   font-size: 26px;
+   color: white;
+ }
+ #tube{
+  position: absolute;
+  width: 29px;
+ }
+ #cap{
+  position: absolute;
+  width: 29px;
+ }
+ #experience{
+  position: absolute;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  top: 50px;
+  left: 270px;
+  height: 204px;
+  width: 31px; 
+ }
+ #lblE{
+  position: absolute;
+  top: 226px;
+  left: 277px;
+  font-size: 26px;
+  color: white
+}
+ #tube2{
+  position: absolute;
+  width: 29px;
+ }
+ #cap2{
+  position: absolute;
+  width: 29px;
+ }
+
+#roomlight{
+  position: absolute;
+  top: 10px;
+  left: 200px;
+}
+#lblHistory{
+  position: absolute;
+  top: 262px;
+  left: 20px;
+  font-size: 20px;
+  color: slategrey
+}
+#history{
+  position: absolute;
+  top: 290px;
+  left: 14px;
+  height: 120px;
+  width: 702px;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  overflow-y: auto;
+}
+#weaponview{
+  position: absolute;
+  top: 262px;
+  left:400px;
+  white-space: nowrap;
+  background-color: #000000;
+}
+#lblAction{
+  position: absolute;
+  top: 424px;
+  left: 20px;
+  font-size: 20px;
+  color: slategrey;
+}
+#actionview{
+  position:absolute;
+  top: 452px;
+  left: 14px;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  padding: 5px;
+  height: 120px;
+  width: 702px;
+  overflow-y: auto;
+}
+#lblInventory{
+  position: absolute;
+  top: 586px;
+  left: 20px;
+  font-size: 20px;
+  color: slategrey
+}
+#inventory{
+  position: absolute;
+  top: 614px;
+  left: 14px;
+  border: 1px solid darkslategray;
+  border-radius: 5px;
+  padding: 5px;
+  height: 120px;
+  width: 702px;
+  overflow-y: auto;
+}
+#player{
+  position: absolute;
+  top: 140px;
+  left: 100px;
+  cursor: pointer;
+  z-index: 10;
+}
+#npc1{
+  position: absolute;
+  top: 165px;
+  left: 100px;
+  display: none;
+  cursor: pointer;
+  z-index: 15;
+}
+#npc2{
+  position: absolute;
+  top: 160px;
+  left: 75px;
+  display: none;
+  cursor: pointer;
+  z-index: 15;
+}
+#npc3{
+  position: absolute;
+  top: 160px;
+  left: 120px;
+  display: none;
+  z-index: 15;
+}
+#npc4{
+  position: absolute;
+  display: none;
+  top: 80px;
+  left: 100px;
+  z-index: 15;
+}
+#npc5{
+  position: absolute;
+  top: 80px;
+  left: 100px;
+  display: none;
+  z-index: 15;
+}
+#gameOver{
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  opacity: .8;
+  display: none;
+  z-index: 100;
+}
+

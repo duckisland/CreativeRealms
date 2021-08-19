@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Creative Realms</title>
+  <link rel="shortcut icon" href="src/favicon.png" />
+  <audio id="audWalk" src="sounds/Walk.ogg" type="audio/ogg"></audio>
+  <audio id="audCoin" src="sounds/Coin.wav" type="audio/wav"></audio>
+  <audio id="audMatch" src="sounds/Match.wav" type="audio/wav"></audio>
+  <audio id="audDrop" src="sounds/Drop.wav" type="audio/wav"></audio>
+  <audio id="audLocked" src="sounds/Locked.wav" type="audio/wav"></audio>
+  <audio id="audUnlock" src="sounds/Unlock.wav" type="audio/wav"></audio>
+  <audio id="audNPC1" src="sounds/hellhound01.wav" type="audio/wav"></audio>
+  <audio id="audNPC2" src="sounds/hellhound01.wav" type="audio/wav"></audio>
+  <audio id="audNPC3" src="sounds/hellhound01.wav" type="audio/wav"></audio>
+  <audio id="audNPC4" src="sounds/hellhound01.wav" type="audio/wav"></audio>
+  <audio id="audNPC5" src="sounds/hellhound01.wav" type="audio/wav"></audio>
+  <audio id="audBattle" src="sounds/fight-hand.wav" type="audio/wav"></audio>
+  <audio id="audGO" src="sounds/GameOver.mp3" type="audio/mp3"></audio>
+  <script src="jquery.min.js"></script>
+  <script src="Functions.js"></script>
+  <script src="Player.js"></script>
+  <script src="Rooms.js"></script>
+  <script src="NPCs.js"></script>
+  <script src="Items.js"></script>
+  <script src="Armor.js"></script>
+</head>
+<body>
+  <div id="title"></div>
+  <div id="lblScore">Score</div>
+  <div id="score">0</div>
+  <div id="roomview" height="200px">
+    <img id="roomImage" src="src/TooDark.jpg">
+    <img id="roomImageTemp" src="src/TooDark.jpg">
+  </div>
+  <div id="health">
+    <img id="cap" src="src/Cap.png">
+    <img id="tube" src="src/Tube.png">
+  </div>
+  <div id="experience">
+    <img id="cap2" src="src/Cap2.png">
+    <img id="tube2" src="src/Tube2.png">
+  </div>
+  <div id="lblH">H</div>
+  <div id="lblE">E</div>
+  <button id="btnNorth" onclick='MovePlayer(0)'>N</button>
+  <button id="btnSouth" onclick='MovePlayer(1)'>S</button>
+  <button id="btnWest" onclick='MovePlayer(3)'>W</button>
+  <button id="btnEast" onclick='MovePlayer(2)'>E</button>
+  <div id="roomdescription"></div>
+  <div id="roomlight"></div>
+  <div id="lblItem">Room Items</div>
+  <div id="itemview"></div>
+  <div id="lblHistory">History</div>
+  <div id="weaponview"></div>
+  <div id="history"></div>
+  <div id="playerview"></div>
+  <div id="lblInventory">Inventory</div>
+  <div id="inventory"></div>
+  <div id="lblAction">Actions</div>
+  <div id="actionview">
+    <button id="illuminate" onclick='Illuminate()'>Light Candle</button>
+  </div>
+  <img id="player" src="src/stand.gif">
+  <img id="npc1" src="">
+  <img id="npc2" src="">
+  <img id="npc3" src="">
+  <img id="npc4" src="">
+  <img id="npc5" src="">
+  <img id="gameOver" src="src/gameover.png">
+</body>
+</html>
