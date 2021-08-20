@@ -181,5 +181,20 @@ var Item = [{
   Description: "dried meat",
   Type: "Food",
   Value: 10
+},{
+  ID: 50,
+  Description: "piece of parchment",
+  Type: "Texts",
+  Value: 5
+},{
+  ID: 51,
+  Description: "scroll",
+  Type: "Texts",
+  Value: 20
+},{
+  ID: 52,
+  Description: "enchanted book",
+  Type: "Texts",
+  Value: 30
 }
 ]
