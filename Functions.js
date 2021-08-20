@@ -310,11 +310,17 @@ function BuildPlayer(){
   let hasInventory = false
   $('#inventory').html('')  
   Player.Items.forEach(i => {
-    if(i.Type === "Weapon"){return}    
+    // Weapons should not appear in inventory (for now)
+    if(i.Type === "Weapon"){return}
     hasInventory = true
     strOut+= "<button onclick='Drop(" + Player.Location + "," + i.ID + ")'>Drop Item</button> "
     if(i.Type === 'Food'){
       strOut += "<button onclick='Eat(" + i.ID + ")'>Eat</button> "
+    }
+    if(i.Type === 'Texts'){
+      // Must get the message ID from the room items
+      
+      strOut += "<button onclick='ReadMe(" + i.MessageID + ")'>Read Me</button> "
     }
     strOut+= i.Qty + " " + i.Description
     if(i.Qty > 1){strOut+= "s"}
@@ -370,13 +376,18 @@ function Take(rID, iID){
     let exactItem = Item.find(e => e.ID == iID)
     // Check to see if Player.Items aleady exists and simply increase the quantity
     const playerItem = Player.Items.findIndex(e => e.ID === iID)
-    if(playerItem > -1){
+    if(playerItem > -1 && exactItem.Type != 'Texts'){
       // Add the quantity found in the room
       Player.Items[playerItem].Qty += thisItem.Qty
     }else{
       // Assign the quantity found in the room
       exactItem.Qty = thisItem.Qty
-      Player.Items.push(exactItem)
+      // Texts must bring along the unique MessageID and the Text
+      if(exactItem.Type == 'Texts'){
+        exactItem.MessageID = thisItem.MessageID
+        exactItem.Text = thisItem.Text
+      }
+      Player.Items.unshift(exactItem)
     }
     currentRoom.Items.splice(idx, 1)
     // if the player picks up a weapon then it will become the Weapon in Hand
@@ -601,6 +612,18 @@ function LogHistory(input, type){
     const currentHistory = $('#history').html()
     const output = "<div style='color:" + color + "'>" + input + "</div>"
     $('#history').html(output + currentHistory)
+}
+
+function ReadMe(msgID){
+  const thisText = Player.Items.find(e => e.MessageID == msgID)
+  $('#readMe').html(thisText.Text)
+  $('#readMe').fadeIn()
+  $('#readMeHide').fadeIn()
+}
+
+function HideReadMe(){
+  $('#readMe').fadeOut()
+  $('#readMeHide').fadeOut()
 }
 
 function getRoom(rID){

@@ -316,6 +316,27 @@ select option{
   cursor: pointer;
   z-index: 15;
 }
+#readMe{
+  position: absolute;
+  top: 580px;
+  left: 120px;
+  width: 595px;
+  height: 25px;
+  padding: 5px;
+  color: black;
+  background-color: bisque;
+  opacity: .6;
+  display: none;
+  border-radius: 3px;
+  z-index: 60;
+}
+#readMeHide{
+ position: absolute;
+ top: 588px;
+ left: 668px;
+ display: none;
+ z-index: 61; 
+}
 #gameOver{
   position: absolute;
   top: 40px;
