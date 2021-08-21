@@ -3,7 +3,11 @@ var Room = [{
   Name: "The Wishing Well",
   Description: "The walls in this room are smooth cement. The area is dimly lit by an opening in the ceiling where there are roots dangling in. The floor is made of large flat stones and mortar.",
   NeedsLight: false,
-  Items:[{ID:0,Qty:37},{ID: 36, Qty: 2},{ID:50, Qty: 1, MessageID: 2, Text: "Collect notes along your quest for hints and pass phrases."}],
+  Items:[
+    {ID:0,Qty:37},
+    {ID: 36, Qty: 2},
+    {ID:50, Qty: 1, MessageID: 2, Text: "Collect notes along your quest for hints and pass phrases."}
+  ],
   Image: "NYNN002.jpg",
   Doors:[
     {
@@ -237,7 +241,7 @@ var Room = [{
     Name: "Clearing in the woods",
     Description: "You have gone outside. This is a good size clearing surrounded by dense woods.",
     NeedsLight: false,
-    Items:[{ID: 1, Qty: 20},{ID:25, Qty: 1}],
+    Items:[{ID: 1, Qty: 20},{ID:23, Qty: 1}],
     Image: "NYYN003.jpg",
     Doors:[
       {

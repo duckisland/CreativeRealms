@@ -134,7 +134,6 @@ function BuildRoom(room){
         }        
       }
     }
-
     if(tooDark){
       $('#roomImage').hide()
       $('#title').html('Darkened Room')
@@ -266,7 +265,8 @@ function RoomItems(room){
     if(!room.NeedsLight){
       room.Items.forEach((rI, index) => {
         const exactItem = Item.find(i => i.ID == rI.ID)
-        strOut+= "<span class='item' onclick='Take(" + room.ID + "," + exactItem.ID + ")'>"
+        const messageID = (rI.MessageID)?rI.MessageID:0
+        strOut+= "<span class='item' onclick='Take(" + exactItem.ID + "," + messageID + ")'>"
         strOut+= rI.Qty + " " + exactItem.Description 
         if(rI.Qty > 1){strOut+= "s"}
         if(index < room.Items.length-1){
@@ -313,13 +313,12 @@ function BuildPlayer(){
     // Weapons should not appear in inventory (for now)
     if(i.Type === "Weapon"){return}
     hasInventory = true
-    strOut+= "<button onclick='Drop(" + Player.Location + "," + i.ID + ")'>Drop Item</button> "
+    strOut+= "<button onclick='Drop(" +  i.ID + "," + i.MessageID + ")'>Drop Item</button> "
     if(i.Type === 'Food'){
       strOut += "<button onclick='Eat(" + i.ID + ")'>Eat</button> "
     }
     if(i.Type === 'Texts'){
-      // Must get the message ID from the room items
-      
+      // Must get the message ID from the room items      
       strOut += "<button onclick='ReadMe(" + i.MessageID + ")'>Read Me</button> "
     }
     strOut+= i.Qty + " " + i.Description
@@ -363,56 +362,73 @@ function SelectWeapon(val){
   Player.WeaponInHand = val.value
 }
 
-function Take(rID, iID){
+function Take(iID, uID){
   let aud = document.getElementById("audCoin")
   aud.volume = .5
   aud.play()
   const currentRoom = getRoom(Player.Location)
-  const idx = currentRoom.Items.findIndex(e => e.ID === iID) 
+  let idx = -1
+  if(uID == 0){
+    idx = currentRoom.Items.findIndex(e => e.ID == iID)
+  } else {
+    // Messages are more unique than regular items so find the index based on the unique ID
+    idx = currentRoom.Items.findIndex(e => e.MessageID == uID)
+  }
   if(idx > -1){
     let thisItem = currentRoom.Items[idx]
     // The room only has an Item ID and a Qty.
-    // This statement pulls the Item with all additional properties from the Item array
-    let exactItem = Item.find(e => e.ID == iID)
-    // Check to see if Player.Items aleady exists and simply increase the quantity
-    const playerItem = Player.Items.findIndex(e => e.ID === iID)
-    if(playerItem > -1 && exactItem.Type != 'Texts'){
-      // Add the quantity found in the room
-      Player.Items[playerItem].Qty += thisItem.Qty
+    // This statement pulls a clone of the Item with all properties from the Items.js array
+    var cloneItem = JSON.parse(JSON.stringify(Item.find(e => e.ID == iID)))
+    // Take the Room.Item values and add them in to the Item object from Items.js array
+    if(cloneItem.Type == 'Texts'){
+      // Cannot just use the item ID if you have more than one Texts type
+      // Need to use the MessageID to find it
+      cloneItem.MessageID = thisItem.MessageID
+      cloneItem.Text = thisItem.Text
+    }
+    // Check to see if this item ID already exists in Player.Items
+    const idxItem = Player.Items.findIndex(e => e.ID == iID)
+    if(idxItem > -1 && cloneItem.Type != 'Texts'){
+      // Add the quantity found in the room. No need to add another object to the Player.Items array
+      Player.Items[idxItem].Qty += thisItem.Qty
     }else{
       // Assign the quantity found in the room
-      exactItem.Qty = thisItem.Qty
-      // Texts must bring along the unique MessageID and the Text
-      if(exactItem.Type == 'Texts'){
-        exactItem.MessageID = thisItem.MessageID
-        exactItem.Text = thisItem.Text
-      }
-      Player.Items.unshift(exactItem)
+      cloneItem.Qty = thisItem.Qty
+      // NOTE: This is somehow the moment of failure
+      Player.Items.unshift(cloneItem)
     }
-    currentRoom.Items.splice(idx, 1)
+    // Splice the taken item out of the room items collection
+     currentRoom.Items.splice(idx, 1)
     // if the player picks up a weapon then it will become the Weapon in Hand
-    if(exactItem.Type === "Weapon"){
-      Player.WeaponInHand = exactItem.ID
+    if(cloneItem.Type === "Weapon"){
+      Player.WeaponInHand = cloneItem.ID
+      WeaponInHandSelector()
     }
   }
   RoomItems(currentRoom)
   BuildPlayer(currentRoom)
-  WeaponInHandSelector()
   UpdateScore()
 }
 
-function Drop(rID, iID){
-  const currentRoom = getRoom(rID)
-  const idx = Player.Items.findIndex(e => e.ID === iID) 
+function Drop(iID, uID){
+  let idx = -1
+  const currentRoom = getRoom(Player.Location)
+  // Get the item from the player based on ID unless there is a more unique ID provided
+  if(uID > 0){
+    idx = Player.Items.findIndex(e => e.MessageID == uID)
+  }else{
+    idx = Player.Items.findIndex(e => e.ID == iID)
+  }
   if(idx > -1){
     let aud = document.getElementById("audDrop")
     aud.play()
     const thisItem = Player.Items[idx]
+    var cloneItem = JSON.parse(JSON.stringify(Player.Items[idx]))
     const roomItem = currentRoom.Items.findIndex(e => e.ID === iID)
-    if(roomItem > -1){
-      currentRoom.Items[roomItem].Qty += thisItem.Qty
+    if(roomItem > -1 && cloneItem.Type != "Texts"){
+      currentRoom.Items[roomItem].Qty += cloneItem.Qty
     }else{
-      currentRoom.Items.push(thisItem)
+      currentRoom.Items.push(cloneItem)
     }
     Player.Items.splice(idx, 1)
   }
@@ -469,16 +485,20 @@ function Illuminate(){
 
 function AttackNPC(elmID, npcID){
   audBattle.pause();
-  if(Player.WeaponInHand > 22){
-    $('#player').attr('src', 'src/fight-sword.gif')    
-    audBattle.setAttribute('src', 'sounds/fight-sword.wav');
-    audBattle.load();
-  }else{
-    $('#player').attr('src', 'src/fight-hand.gif')
-    audBattle.setAttribute('src', 'sounds/fight-hand.wav');
-    audBattle.load();
+  switch(Player.WeaponInHand){
+    case '20': case 20:
+      $('#player').attr('src', 'src/fight-hand.gif')
+      audBattle.setAttribute('src', 'sounds/fight-hand.wav');
+    break
+    case '21': case '22': case 21: case 22:
+      $('#player').attr('src','src/fight-wood.gif')
+      audBattle.setAttribute('src', 'sounds/fight-wood.wav');
+    break
+    default:
+      $('#player').attr('src', 'src/fight-sword.gif')    
+      audBattle.setAttribute('src', 'sounds/fight-sword.wav');
   }
-  audBattle.pause()
+  audBattle.load();
   audBattle.play()
   // Player.Experience increases chances and damage
   const currentRoom = getRoom(Player.Location)
