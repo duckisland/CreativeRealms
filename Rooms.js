@@ -6,7 +6,7 @@ var Room = [{
   Items:[
     {ID:0,Qty:37},
     {ID: 36, Qty: 2},
-    {ID:50, Qty: 1, MessageID: 2, Text: "Collect notes along your quest for hints and pass phrases."}
+    {ID:50, Qty: 1, SubID: 2, Text: "Collect notes along your quest for hints and pass phrases."}
   ],
   Image: "NYNN002.jpg",
   Doors:[
@@ -197,7 +197,7 @@ var Room = [{
     Name: "Curving Corridor",
     Description: "This passageway simply leads down to another room.",
     NeedsLight: true,
-    Items:[{ID: 50, Qty: 1, MessageID: 1, Text: 'The secret phrase is "curvature"'}],
+    Items:[{ID: 50, Qty: 1, SubID: 1, Text: 'The secret phrase is "curvature"'}],
     Image: "YNNY001.jpg",
     Doors:[
       {

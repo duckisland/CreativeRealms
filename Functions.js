@@ -265,8 +265,8 @@ function RoomItems(room){
     if(!room.NeedsLight){
       room.Items.forEach((rI, index) => {
         const exactItem = Item.find(i => i.ID == rI.ID)
-        const messageID = (rI.MessageID)?rI.MessageID:0
-        strOut+= "<span class='item' onclick='Take(" + exactItem.ID + "," + messageID + ")'>"
+        const sID = (rI.SubID)?rI.SubID:0
+        strOut+= "<span class='item' onclick='Take(" + exactItem.ID + "," + sID + ")'>"
         strOut+= rI.Qty + " " + exactItem.Description 
         if(rI.Qty > 1){strOut+= "s"}
         if(index < room.Items.length-1){
@@ -313,13 +313,13 @@ function BuildPlayer(){
     // Weapons should not appear in inventory (for now)
     if(i.Type === "Weapon"){return}
     hasInventory = true
-    strOut+= "<button onclick='Drop(" +  i.ID + "," + i.MessageID + ")'>Drop Item</button> "
+    strOut+= "<button onclick='Drop(" +  i.ID + "," + i.SubID + ")'>Drop Item</button> "
     if(i.Type === 'Food'){
       strOut += "<button onclick='Eat(" + i.ID + ")'>Eat</button> "
     }
     if(i.Type === 'Manuscript'){
       // Must get the message ID from the room items      
-      strOut += "<button onclick='ReadMe(" + i.MessageID + ")'>Read Me</button> "
+      strOut += "<button onclick='ReadMe(" + i.SubID + ")'>Read Me</button> "
     }
     strOut+= i.Qty + " " + i.Description
     if(i.Qty > 1){strOut+= "s"}
@@ -362,17 +362,17 @@ function SelectWeapon(val){
   Player.WeaponInHand = val.value
 }
 
-function Take(iID, uID){
+function Take(iID, sID){
   let aud = document.getElementById("audCoin")
   aud.volume = .5
   aud.play()
   const currentRoom = getRoom(Player.Location)
   let idx = -1
-  if(uID == 0){
+  if(sID == 0){
     idx = currentRoom.Items.findIndex(e => e.ID == iID)
   } else {
     // Messages are more unique than regular items so find the index based on the unique ID
-    idx = currentRoom.Items.findIndex(e => e.MessageID == uID)
+    idx = currentRoom.Items.findIndex(e => e.SubID == sID)
   }
   if(idx > -1){
     let thisItem = currentRoom.Items[idx]
@@ -382,8 +382,8 @@ function Take(iID, uID){
     // Take the Room.Item values and add them in to the Item object from Items.js array
     if(cloneItem.Type == 'Manuscript'){
       // Cannot just use the item ID if you have more than one Manuscript type
-      // Need to use the MessageID to find it
-      cloneItem.MessageID = thisItem.MessageID
+      // Need to use the SubID to find it
+      cloneItem.SubID = thisItem.SubID
       cloneItem.Text = thisItem.Text
     }
     // Check to see if this item ID already exists in Player.Items
@@ -410,12 +410,12 @@ function Take(iID, uID){
   UpdateScore()
 }
 
-function Drop(iID, uID){
+function Drop(iID, sID){
   let idx = -1
   const currentRoom = getRoom(Player.Location)
   // Get the item from the player based on ID unless there is a more unique ID provided
-  if(uID > 0){
-    idx = Player.Items.findIndex(e => e.MessageID == uID)
+  if(sID > 0){
+    idx = Player.Items.findIndex(e => e.SubID == sID)
   }else{
     idx = Player.Items.findIndex(e => e.ID == iID)
   }
@@ -634,11 +634,14 @@ function LogHistory(input, type){
     $('#history').html(output + currentHistory)
 }
 
-function ReadMe(msgID){
-  const thisText = Player.Items.find(e => e.MessageID == msgID)
+function ReadMe(sID){
+  const thisText = Player.Items.find(e => e.SubID == sID)
   $('#readMe').html(thisText.Text)
   $('#readMe').fadeIn()
   $('#readMeHide').fadeIn()
+  setTimeout(function(){
+    HideReadMe()
+  },3000)
 }
 
 function HideReadMe(){
