@@ -233,34 +233,16 @@ select option{
   white-space: nowrap;
   background-color: #000000;
 }
-#lblAction{
+#lblInventory{
   position: absolute;
   top: 424px;
   left: 20px;
   font-size: 20px;
   color: slategrey;
 }
-#actionview{
+#inventory{
   position:absolute;
   top: 452px;
-  left: 14px;
-  border: 1px solid darkslategray;
-  border-radius: 5px;
-  padding: 5px;
-  height: 120px;
-  width: 702px;
-  overflow-y: auto;
-}
-#lblInventory{
-  position: absolute;
-  top: 586px;
-  left: 20px;
-  font-size: 20px;
-  color: slategrey
-}
-#inventory{
-  position: absolute;
-  top: 614px;
   left: 14px;
   border: 1px solid darkslategray;
   border-radius: 5px;
@@ -318,7 +300,7 @@ select option{
 }
 #readMe{
   position: absolute;
-  top: 584px;
+  top: 420px;
   left: 120px;
   width: 595px;
   height: 25px;

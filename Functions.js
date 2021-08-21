@@ -6,7 +6,7 @@ var ReturnDirection = 0
 var justLit = false
 var load = true
 const audBattle = document.getElementById("audBattle")
-var genTimer
+var genTimer // Used later to create timers and allow clearTimeout
 
 $(function(){
     // This is game initialization
@@ -306,8 +306,6 @@ function Experience(){
 
 function BuildPlayer(){
   let strOut = ""
-  let hasCandle = false
-  let hasFlint = false
   let hasInventory = false
   $('#inventory').html('')  
   Player.Items.forEach(i => {
@@ -322,21 +320,25 @@ function BuildPlayer(){
       // Must get the message ID from the room items      
       strOut += "<button onclick='ReadMe(" + i.SubID + ")'>Read Me</button> "
     }
+    if(i.ID === 9 && HasFlint()){
+      strOut += "<button onclick='Illuminate()'>Light Candle</button> "
+    }
     strOut+= i.Qty + " " + i.Description
     if(i.Qty > 1){strOut+= "s"}
     strOut+= " worth " + i.Qty * i.Value + " " + currency + "<br>"
-    if(i.ID === 9){hasCandle = true}
-    if(i.ID === 10){hasFlint = true}
   })
   if(hasInventory){
       $("#inventory").html(strOut)
   }
-  if(hasCandle && hasFlint){
-    $('#illuminate').show()
-  } else {
-    $('#illuminate').hide()
-  }
 }
+
+function HasFlint(){
+  if(Player.Items.find(e => e.ID == 10)){
+    return true
+  }
+  return false
+}
+
 
 function WeaponInHandSelector(){
   // Weapon in Hand selector
