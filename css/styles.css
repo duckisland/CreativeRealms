@@ -318,7 +318,7 @@ select option{
 }
 #readMe{
   position: absolute;
-  top: 580px;
+  top: 584px;
   left: 120px;
   width: 595px;
   height: 25px;
@@ -326,16 +326,10 @@ select option{
   color: black;
   background-color: bisque;
   opacity: .6;
+  text-align: center;
   display: none;
   border-radius: 3px;
   z-index: 60;
-}
-#readMeHide{
- position: absolute;
- top: 588px;
- left: 668px;
- display: none;
- z-index: 61; 
 }
 #gameOver{
   position: absolute;

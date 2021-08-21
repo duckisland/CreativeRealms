@@ -6,6 +6,7 @@ var ReturnDirection = 0
 var justLit = false
 var load = true
 const audBattle = document.getElementById("audBattle")
+var genTimer
 
 $(function(){
     // This is game initialization
@@ -638,15 +639,10 @@ function ReadMe(sID){
   const thisText = Player.Items.find(e => e.SubID == sID)
   $('#readMe').html(thisText.Text)
   $('#readMe').fadeIn()
-  $('#readMeHide').fadeIn()
-  setTimeout(function(){
-    HideReadMe()
+  clearTimeout(genTimer)
+  genTimer = setTimeout(function(){
+    $('#readMe').fadeOut()
   },3000)
-}
-
-function HideReadMe(){
-  $('#readMe').fadeOut()
-  $('#readMeHide').fadeOut()
 }
 
 function getRoom(rID){
