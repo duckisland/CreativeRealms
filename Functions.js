@@ -317,7 +317,7 @@ function BuildPlayer(){
     if(i.Type === 'Food'){
       strOut += "<button onclick='Eat(" + i.ID + ")'>Eat</button> "
     }
-    if(i.Type === 'Texts'){
+    if(i.Type === 'Manuscript'){
       // Must get the message ID from the room items      
       strOut += "<button onclick='ReadMe(" + i.MessageID + ")'>Read Me</button> "
     }
@@ -380,15 +380,15 @@ function Take(iID, uID){
     // This statement pulls a clone of the Item with all properties from the Items.js array
     var cloneItem = JSON.parse(JSON.stringify(Item.find(e => e.ID == iID)))
     // Take the Room.Item values and add them in to the Item object from Items.js array
-    if(cloneItem.Type == 'Texts'){
-      // Cannot just use the item ID if you have more than one Texts type
+    if(cloneItem.Type == 'Manuscript'){
+      // Cannot just use the item ID if you have more than one Manuscript type
       // Need to use the MessageID to find it
       cloneItem.MessageID = thisItem.MessageID
       cloneItem.Text = thisItem.Text
     }
     // Check to see if this item ID already exists in Player.Items
     const idxItem = Player.Items.findIndex(e => e.ID == iID)
-    if(idxItem > -1 && cloneItem.Type != 'Texts'){
+    if(idxItem > -1 && cloneItem.Type != 'Manuscript'){
       // Add the quantity found in the room. No need to add another object to the Player.Items array
       Player.Items[idxItem].Qty += thisItem.Qty
     }else{
@@ -425,7 +425,7 @@ function Drop(iID, uID){
     const thisItem = Player.Items[idx]
     var cloneItem = JSON.parse(JSON.stringify(Player.Items[idx]))
     const roomItem = currentRoom.Items.findIndex(e => e.ID === iID)
-    if(roomItem > -1 && cloneItem.Type != "Texts"){
+    if(roomItem > -1 && cloneItem.Type != "Manuscript"){
       currentRoom.Items[roomItem].Qty += cloneItem.Qty
     }else{
       currentRoom.Items.push(cloneItem)

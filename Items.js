@@ -184,17 +184,17 @@ var Item = [{
 },{
   ID: 50,
   Description: "piece of parchment",
-  Type: "Texts",
+  Type: "Manuscript",
   Value: 5
 },{
   ID: 51,
   Description: "scroll",
-  Type: "Texts",
+  Type: "Manuscript",
   Value: 20
 },{
   ID: 52,
   Description: "enchanted book",
-  Type: "Texts",
+  Type: "Manuscript",
   Value: 30
 }
 ]
