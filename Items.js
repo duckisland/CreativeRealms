@@ -46,12 +46,12 @@ var Item = [{
 },{
   ID: 9,
   Description: "candle",
-  Type: "Candle",
+  Type: "Supplies",
   Value: 5
 },{
   ID: 10,
   Description: "flint stone",
-  Type: "Flint",
+  Type: "Supplies",
   Value: 1
 },{
   ID: 11,
