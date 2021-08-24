@@ -597,6 +597,11 @@ function Eat(itemID){
   // Find it in the Player's items
   const foodItem = Player.Items.find(e => e.ID == itemID && e.Type === 'Food')
   if(foodItem.Qty >= 1){
+    $("#pwrUp").attr("src", "src/PowerUp.gif")
+    $("#pwrUp").show()
+    var audPowerUp = document.getElementById('audPowerUp')
+    audPowerUp.load()
+    audPowerUp.play()
     Player.Health += foodItem.Value
     if(Player.Health > 100){Player.Health = 100}
     HealthMeter()

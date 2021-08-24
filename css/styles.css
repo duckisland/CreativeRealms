@@ -255,8 +255,14 @@ select option{
   position: absolute;
   top: 140px;
   left: 100px;
-  cursor: pointer;
   z-index: 10;
+}
+#pwrUp{
+  position: absolute;
+  top: 140px;
+  left: 100px;
+  display:none;
+  z-index: 11;
 }
 #npc1{
   position: absolute;
