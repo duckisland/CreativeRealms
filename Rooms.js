@@ -242,7 +242,7 @@ var Room = [{
     Description: "You have gone outside. This is a good size clearing surrounded by dense woods.",
     NeedsLight: false,
     Items:[{ID: 1, Qty: 20},{ID:23, Qty: 1}],
-    Image: "NYYN003.jpg",
+    Image: "NYYN003.png",
     Doors:[
       {
         //North
@@ -265,7 +265,7 @@ var Room = [{
     NeedsLight: false,
     Items:[{ID: 36, Qty: 15}],
     NPCs:[{ID:0, Health: 20},{ID:0, Health: 20},{ID:0, Health:20}],
-    Image: "YNNY003.jpg",
+    Image: "YNNY003.png",
     Doors:[
       {
         //North
