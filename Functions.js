@@ -644,6 +644,9 @@ function LogHistory(input, type){
 
 function ReadMe(sID){
   const thisText = Player.Items.find(e => e.SubID == sID)
+  const audPaper = document.getElementById('audPaper')
+  audPaper.pause()
+  audPaper.play()
   $('#readMe').html(thisText.Text)
   $('#readMe').fadeIn()
   clearTimeout(genTimer)

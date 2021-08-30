@@ -28,7 +28,7 @@ var Room = [{
   Description: "This room is small, dark and dusty.",
   NeedsLight: false,
   Items:[{ID: 9, Qty: 1},{ID:11, Qty: 1}],
-  Image: "NNYN001.jpg",
+  Image: "NNYN005.png",
   Doors:[
     {
       //North
