@@ -1,3 +1,4 @@
+// Creative Realms Game
 var currency = "dolats"
 var gameOver = false
 const baseExperience = 70
